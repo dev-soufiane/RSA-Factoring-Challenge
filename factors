@@ -1,32 +1,30 @@
 #!/usr/bin/env python3
-
-'''Module - Factors natural numbers'''
+"""Module - Factors natural numbers"""
 
 from __future__ import division
 import sys
 import os
 
 
-def calculate_factors(filename):
-    '''Read and find factors of every line'''
-    with open(filename, 'r') as file:
-        for line in file:
-            number = int(line)
-            result = find_factors(number)
-            print("{}={}*{}".format(number, int(number / result), result))
-    file.closed
+def factorizer(filename):
+    """Read and find factorials of every line """
+    with open(filename, 'r') as f:
+        for line in f:
+            n = int(line)
+            res = func_facto(n)
+            print("{}={}*{}".format(n, int(n / res), res))
+    f.closed
 
 
-def find_factors(x):
-    '''Returns the minimum factorial number'''
-    for y in range(1, x + 1):
-        if x % y == 0 and y != 1:
-            return y
+def func_facto(n):
+    """Returns the minimun factorial value """
+    for i in range(1, n + 1):
+        if n % i == 0 and i != 1:
+            return i
 
 
 if __name__ == "__main__":
-
-    '''Main'''
-    if len(sys.argv) != 2:
+    """main"""
+    if (len(sys.argv) != 2):
         raise SyntaxError("[BAD-USAGE]: Expected only one argument")
-    calculate_factors(sys.argv[1])
+    factorizer(sys.argv[1])
