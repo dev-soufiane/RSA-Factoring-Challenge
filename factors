@@ -1,36 +1,41 @@
-#!/usr/bin/python3
-"""This Module Factorize as many numbers as possible into a product
-of two smaller numbers."""
+#!/usr/bin/env python3
+""" Factorize as many numbers as possible into
+a product of two smaller numbers. """
+
 
 from sys import argv
+from math import sqrt
 
 
-def factorize(x):
-    """"Print a concise breakdown of an integer > 1,
-    showing its prime factors and multiplicities."""
-    i = 2
-
-    if x < 2:
-        return
-    print()
-    print(x, "<- x-bef")
-    while x % i:
-        i += 1
-    print("{:.0f}={:.0f}*{:.0f}".format(x, x / i, i))
-    print(x, "<- x-aft")
-    print()
+def read_file(fname):
+    """
+    Reads from a file and adds the contents to an array.
+    """
+    with open(fname, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+    num = []
+    for line in lines:
+        num.append(int(line))
+    return num
 
 
-if len(argv) != 2:
-    exit()
+def findFactors(x):
+    """
+    Find and display the factors of a given number.
+    """
+    for i in range(1, x):
+        if x == ((x // i) * i):
+            print("{}={}*{}".format(x, (x // i), i))
+            break
 
-try:
-    with open(argv[1]) as f:
-        line = f.readline()
 
-        while line != "":
-            x = int(line.split('\n')[0])
-            factorize(x)
-            line = f.readline()
-ecept:
-    pass
+def factorize_list(lst):
+    """
+    Factorize each number in the given list.
+    """
+    for i in lst:
+        findFactors(i)
+
+
+if len(argv) == 2:
+    factorize_list(read_file(argv[1]))
